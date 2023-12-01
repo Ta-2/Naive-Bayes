@@ -72,10 +72,27 @@ print(setosa)
 print(versicolor)
 print(virginica)
 
-test_X0 = np.array([ np.array([i, 0.0, 0.0, 0.0]) for i in np.linspace(4, 8, 20) ])
-test_X1 = np.array([ np.array([i, 0.0, 0.0, 0.0]) for i in np.linspace(2, 5, 20) ])
-test_X2 = np.array([ np.array([i, 0.0, 0.0, 0.0]) for i in np.linspace(1, 7, 20) ])
-test_X3 = np.array([ np.array([i, 0.0, 0.0, 0.0]) for i in np.linspace(0.1, 2.5, 20) ])
+plt_num = 200
+x0 = np.linspace(4, 8, 20)
+x1 = np.linspace(2, 5, 20)
+x2 = np.linspace(1, 7, 20)
+x3 = np.linspace(0.1, 2.5, 20)
+
+x0 = np.linspace(-10, 40, plt_num)
+x1 = np.linspace(-10, 40, plt_num)
+x2 = np.linspace(-10, 40, plt_num)
+x3 = np.linspace(-10, 40, plt_num)
+
+m = np.average(X, axis=0)
+x0_m = m[0]
+x1_m = m[1]
+x2_m = m[2]
+x3_m = m[3]
+
+test_X0 = np.array([ np.array([i, m[1], m[2], m[3]]) for i in x0 ])
+test_X1 = np.array([ np.array([m[0], i, m[2], m[3]]) for i in x1 ])
+test_X2 = np.array([ np.array([m[0], m[1], i, m[3]]) for i in x2 ])
+test_X3 = np.array([ np.array([m[0], m[1], m[2], i]) for i in x3 ])
 
 pred_Y0 = M.predict_proba(test_X0).T
 pred_Y1 = M.predict_proba(test_X1).T
@@ -89,20 +106,20 @@ ax[0, 1].set_title("sepal_Width")
 ax[1, 0].set_title("Petal_Length")
 ax[1, 1].set_title("Petal_Width")
 
-ax[0, 0].plot(np.linspace(4, 8, 20), pred_Y0[0])
-ax[0, 0].plot(np.linspace(4, 8, 20), pred_Y0[1])
-ax[0, 0].plot(np.linspace(4, 8, 20), pred_Y0[2])
+ax[0, 0].plot(x0, pred_Y0[0])
+ax[0, 0].plot(x0, pred_Y0[1])
+ax[0, 0].plot(x0, pred_Y0[2])
 
-ax[0, 1].plot(np.linspace(2, 5, 20), pred_Y1[0])
-ax[0, 1].plot(np.linspace(2, 5, 20), pred_Y1[1])
-ax[0, 1].plot(np.linspace(2, 5, 20), pred_Y1[2])
+ax[0, 1].plot(x1, pred_Y1[0])
+ax[0, 1].plot(x1, pred_Y1[1])
+ax[0, 1].plot(x1, pred_Y1[2])
 
-ax[1, 0].plot(np.linspace(1, 7, 20), pred_Y2[0])
-ax[1, 0].plot(np.linspace(1, 7, 20), pred_Y2[1])
-ax[1, 0].plot(np.linspace(1, 7, 20), pred_Y2[2])
+ax[1, 0].plot(x2, pred_Y2[0])
+ax[1, 0].plot(x2, pred_Y2[1])
+ax[1, 0].plot(x2, pred_Y2[2])
 
-ax[1, 1].plot(np.linspace(0.1, 2.5, 20), pred_Y3[0])
-ax[1, 1].plot(np.linspace(0.1, 2.5, 20), pred_Y3[1])
-ax[1, 1].plot(np.linspace(0.1, 2.5, 20), pred_Y3[2])
+ax[1, 1].plot(x3, pred_Y3[0])
+ax[1, 1].plot(x3, pred_Y3[1])
+ax[1, 1].plot(x3, pred_Y3[2])
 
 plt.show()
